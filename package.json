@@ -1,6 +1,7 @@
 {
   "name": "transformusestate",
   "displayName": "transformUseState",
+  "publisher": "beikeliu",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -9,6 +10,7 @@
   "categories": [
     "Other"
   ],
+  "repository": "https://github.com/beikeliu/transformUseState.git",
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
