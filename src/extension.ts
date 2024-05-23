@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
       editor.edit((editBuilder) => {
         selections.forEach((selection) => {
           const text = document.getText(selection);
-					const regex = /const \[(\w+),\s*\]/g;
+					const regex = /const \[(\w+)\s*\]/g;
           const newText = text.replace(regex, (match, p1) => {
 						const capitalized = p1.charAt(0).toUpperCase() + p1.slice(1);
 						return `const [${p1}, set${capitalized}] = useState();`;
