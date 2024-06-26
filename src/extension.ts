@@ -2,27 +2,26 @@ import * as vscode from "vscode";
 
 export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand(
-    "extension.transformUseState",
+    "extension.useStateGenerator",
     () => {
       const editor = vscode.window.activeTextEditor;
-
       if (!editor) {
         return;
       }
 
-      const document = editor.document;
-      const selections = editor.selections;
+      // 弹出输入框让用户输入变量名
+      vscode.window.showInputBox({ prompt: "请输入变量名" }).then((value) => {
+        if (!value) {return;} // 如果用户没有输入，直接返回
 
-      editor.edit((editBuilder) => {
-        selections.forEach((selection) => {
-          const text = document.getText(selection);
-					const regex = /const \[(\w+)\s*\]/g;
-          const newText = text.replace(regex, (match, p1) => {
-						const capitalized = p1.charAt(0).toUpperCase() + p1.slice(1);
-						return `const [${p1}, set${capitalized}] = useState();`;
-				});
+        const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
+        const useStateCode = `const [${value}, set${capitalizedValue}] = useState();`;
 
-          editBuilder.replace(selection, newText);
+        // 获取当前编辑器的光标位置
+        const position = editor.selection.active;
+
+        // 在当前光标位置插入useState代码
+        editor.edit((editBuilder) => {
+          editBuilder.insert(position, useStateCode);
         });
       });
     }

@@ -3,7 +3,7 @@
   "displayName": "Auto Complete useState",
   "publisher": "beikeliu",
   "description": "",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "icon": "./images/icon.png",
   "engines": {
     "vscode": "^1.89.0"
@@ -17,7 +17,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.transformUseState",
+        "command": "extension.useStateGenerator",
         "title": "complete useState"
       }
     ]
